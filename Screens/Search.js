@@ -2,13 +2,13 @@ import {Image, StyleSheet, TextInput, View} from 'react-native';
 import React, {useContext, useState} from 'react';
 import Layout from '../Components/Layout';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Card from '../Components/Card';
 import {Store} from '../Utils/Store';
+import TodoCard from '../Components/TodoCard';
 
 const Search = ({navigation}) => {
   const {state, dispatch} = useContext(Store);
   const [Search, setSearch] = useState('');
-  const filterData = state.Items.filter(
+  const filterData = state.ToDo.filter(
     item => item.title.toLocaleLowerCase() === Search.toLocaleLowerCase(),
   ); //Filtering data with search input
 
@@ -23,7 +23,7 @@ const Search = ({navigation}) => {
         />
         <TextInput
           style={styles.searchInput}
-          placeholder="Search Products"
+          placeholder="Search Something"
           value={Search}
           onChangeText={Text => setSearch(Text)}
         />
@@ -38,17 +38,13 @@ const Search = ({navigation}) => {
         ) : null}
       </View>
       {Search && filterData.length > 0 ? (
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-          }}>
-          {filterData.map((item, i) => (
+        <View style={{marginTop:20}}>
+          {filterData.map((todo, i) => (
             <View key={i}>
-              <Card item={item} />
+              <TodoCard todo={todo} />
             </View>
           ))}
+        
         </View>
       ) : (
         <Image

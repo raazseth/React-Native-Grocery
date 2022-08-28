@@ -23,7 +23,7 @@ const Header = ({navigation}) => {
         />
         <TextInput
           style={styles.searchInput}
-          placeholder="Search Products"
+          placeholder="Search Something"
           editable={false}
         />
       </TouchableOpacity>
@@ -32,7 +32,7 @@ const Header = ({navigation}) => {
         onPress={() => navigation.navigate('Add')}
         style={[styles.backgroundStyle, styles.boxShadowStyle]}>
         <Image
-          source={require('../Assets/AddProduct.png')}
+          source={require('../Assets/plus-sign.png')}
           style={{width: 24, height: 24}}
         />
       </TouchableOpacity>

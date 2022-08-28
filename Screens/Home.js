@@ -1,92 +1,110 @@
 import {
-  Dimensions,
-  Image,
+  ActivityIndicator,
+  Alert,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import Layout from '../Components/Layout';
 import Card from '../Components/Card';
 import {Store} from '../Utils/Store';
-import Carousel from 'react-native-snap-carousel';
-
-export const SLIDER_WIDTH = Dimensions.get('window').width + 80;
-export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 1);
-
-const renderSliderItem = ({item}) => {
-  return <Image source={item.img} style={styles.BannerImg} />;
-};
+import Input from '../Components/Input';
+import TodoCard from '../Components/TodoCard';
+import {colorData} from '../Utils/Data';
+import moment from 'moment';
 
 const Home = ({navigation}) => {
+  const [title, settitle] = useState('');
+  const [loading, setloading] = useState(false);
+  const [color, setcolor] = useState('#fde9d1');
   const {state, dispatch} = useContext(Store);
 
-  const Banners = [
-    {img: require('../Assets/12130.jpg')},
-    {img: require('../Assets/28051.jpg')},
-    {img: require('../Assets/65481.png')},
-  ];
+  const SaveItem = () => {
+    if (!loading) {
+      if (title === '') {
+        Alert.alert('Enter Title');
+      } else if (color === '') {
+        Alert.alert('Choose Color');
+      } else {
+        setloading(true);
+        const data = {
+          title,
+          color,
+          createdAt: moment().format(),
+        };
+        setTimeout(() => {
+          dispatch({
+            type: 'ADD_TO_DO_LIST',
+            payload: {
+              ToDo: [...state.ToDo, data],
+            },
+          });
+          setloading(false);
+          settitle('');
+          setcolor('#fde9d1');
+        }, 1800);
+      }
+    }
+  };
 
-  console.log(state);
   return (
     <Layout isHeader navigation={navigation} showOverlay={true}>
       <View>
         <View style={styles.OverlayBox}>
-          <Carousel //Using react-native-snap-carousel for slideshow of banners
-            data={Banners}
-            renderItem={renderSliderItem}
-            sliderWidth={SLIDER_WIDTH}
-            itemWidth={ITEM_WIDTH}
+          <Text style={styles.headTxt}>Add To Your List</Text>
+          <Input
+            label="Title"
+            value={title}
+            onChange={text => settitle(text)}
+            placeholder="Enter Title"
           />
-        </View>
-        {state.cart.length > 0 ? (
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {colorData.map(Color => (
+              <TouchableOpacity
+                key={Color}
+                activeOpacity={0.5}
+                onPress={() => setcolor(Color)}
+                style={[
+                  styles.colorData,
+                  {
+                    borderColor: Color === color ? '#333' : 'transparent',
+                    backgroundColor: Color,
+                  },
+                ]}
+              />
+            ))}
+          </ScrollView>
           <TouchableOpacity
-            onPress={() => navigation.navigate('Cart')}
+            onPress={SaveItem}
             activeOpacity={0.8}
-            style={styles.cartCard}>
-            <Image
-              source={require('../Assets/carts.png')}
-              style={{width: 24, height: 24}}
-            />
-            <Text style={styles.cartCardTxt}>
-              You have {state.cart.length} item in your cart!
-            </Text>
+            style={styles.SaveBtn}>
+            {loading ? (
+              <ActivityIndicator size="small" color="#febd55" />
+            ) : (
+              <Text style={styles.SaveBtnTxt}>Save Item</Text>
+            )}
           </TouchableOpacity>
-        ) : null}
-        <View style={styles.Trend}>
-          <Image
-            source={{
-              uri: 'https://res.cloudinary.com/doqz6idk4/image/upload/v1661598560/Grocery/flash-sale_qmt3dp.png',
-            }}
-            style={{width: 22, height: 22}}
-          />
-          <Text style={styles.headTxt}>Trending This Week</Text>
         </View>
-        <ScrollView horizontal>
+
+        <Text style={styles.headTxt2}>Your WatchList</Text>
+        {state.ToDo.slice() //Reverse and Slice use for array to show recent added array objects
+          .reverse()
+          .map((todo, i) => (
+            <View key={i}>
+              <TodoCard todo={todo} />
+            </View>
+          ))}
+        <Text style={styles.headTxt2}>Recommended</Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {state.Items.map((item, i) => (
             <View key={i}>
               <Card item={item} />
             </View>
           ))}
         </ScrollView>
-        <Text style={styles.headTxt2}>Recently Added</Text>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-          }}>
-          {state.Items.slice() //Reverse and Slice use for array to show recent added array objects
-            .reverse()
-            .map((item, i) => (
-              <View key={i}>
-                <Card item={item} />
-              </View>
-            ))}
-        </View>
       </View>
     </Layout>
   );
@@ -97,14 +115,19 @@ export default Home;
 const styles = StyleSheet.create({
   OverlayBox: {
     height: 'auto',
-    backgroundColor: 'transparent',
+    backgroundColor: 'white',
     marginTop: -120,
     width: '94%',
     marginLeft: 'auto',
     marginRight: 'auto',
+    padding: 10,
     borderRadius: 12,
+    shadowColor: 'gray',
+    shadowOffset: {width: -2, height: 4},
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 8,
     marginBottom: 10,
-    overflow: 'hidden',
   },
   headTxt: {
     fontSize: 17,
@@ -114,6 +137,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
     marginBottom: 'auto',
     marginLeft: 2,
+    marginBottom: 10,
   },
   headTxt2: {
     marginLeft: 14,
@@ -124,42 +148,24 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: 'bold',
   },
-  BannerImg: {
-    width: '100%',
-    height: 182,
-    borderRadius: 8,
-    resizeMode: 'contain',
-    marginRight: 60,
-    backgroundColor: '#f4fafd',
-  },
-  Trend: {
-    display: 'flex',
-    flexDirection: 'row',
-    marginBottom: 10,
-    marginLeft: 12,
-    marginTop: 6,
-  },
-  cartCard: {
-    display: 'flex',
-    flexDirection: 'row',
+
+  SaveBtn: {
+    backgroundColor: '#2f2f2f',
+    padding: 16,
     borderRadius: 12,
-    borderWidth: 1,
-    backgroundColor: '#fff6f7',
-    borderColor: '#F38EAD',
-    padding: 7,
-    width: '95%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: 4,
-    marginBottom: 4,
+    marginTop: 32,
   },
-  cartCardTxt: {
-    fontWeight: 'bold',
-    color: '#F38EAD',
+  SaveBtnTxt: {
+    color: '#fff',
     fontSize: 18,
-    marginTop: 'auto',
-    marginRight: 'auto',
+    textAlign: 'center',
+  },
+  colorData: {
+    height: 40,
+    width: 40,
+    borderRadius: 50,
+    borderWidth: 1,
+    marginRight: 6,
     marginLeft: 6,
-    fontStyle: 'italic',
   },
 });

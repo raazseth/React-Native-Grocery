@@ -1,7 +1,6 @@
 import {
   ActivityIndicator,
   Alert,
-  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -11,63 +10,41 @@ import {
 import React, {useState, useContext} from 'react';
 import Input from '../Components/Input';
 import Layout from '../Components/Layout';
-import {ImageDate} from '../Utils/Data';
 import {Store} from '../Utils/Store';
+import {colorData} from '../Utils/Data';
+import moment from 'moment';
 
 const Add = ({navigation}) => {
   const {state, dispatch} = useContext(Store);
   const [title, settitle] = useState('');
-  const [price, setprice] = useState('');
-  const [unit, setunit] = useState('Kg');
-  const [img, setimg] = useState(
-    'https://res.cloudinary.com/doqz6idk4/image/upload/v1641925846/Grocery/LcAvMEYOw-Potato.jpg.jpg',
-  );
+  const [color, setcolor] = useState('#fde9d1');
   const [loading, setloading] = useState(false);
-
-  const handleUnit = Unit => {
-    if (Unit === unit) {
-      setunit('');
-    } else {
-      setunit(Unit);
-    }
-  };
-
-  const handleImage = Img => {
-    if (Img === img) {
-      setimg('');
-    } else {
-      setimg(Img);
-    }
-  };
 
   const SaveItem = () => {
     if (!loading) {
       if (title === '') {
         Alert.alert('Enter Title');
-      } else if (price === 0 || price === '') {
-        Alert.alert('Enter Price');
-      } else if (unit === '') {
-        Alert.alert('Choose Unit');
-      } else if (img === '') {
-        Alert.alert('Choose Image');
+      } else if (color === '') {
+        Alert.alert('Choose Color');
       } else {
         setloading(true);
         const data = {
           title,
-          price,
-          img,
-          unit,
+          color,
+          createdAt: moment().format(),
         };
-        dispatch({
-          type: 'ADD_TO_ITEM_LIST',
-          payload: {
-            Items: [...state.Items, data],
-          },
-        });
         setTimeout(() => {
+          dispatch({
+            type: 'ADD_TO_DO_LIST',
+            payload: {
+              ToDo: [...state.ToDo, data],
+            },
+          });
           setloading(false);
           navigation.navigate('Home');
-        }, 2500);
+          settitle('');
+          setcolor('#fde9d1');
+        }, 1800);
       }
     }
   };
@@ -75,50 +52,28 @@ const Add = ({navigation}) => {
   return (
     <Layout isHeader={true} navigation={navigation} showOverlay={true}>
       <View style={styles.OverlayBox}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {ImageDate.map(Img => (
-            <TouchableOpacity
-              key={Img}
-              activeOpacity={0.8}
-              onPress={() => handleImage(Img)}>
-              <Image
-                source={{uri: Img}}
-                style={[
-                  styles.ChooseImg,
-                  {borderColor: Img === img ? '#009baf' : 'transparent'},
-                ]}
-              />
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
         <Input
           label="Title"
           value={title}
           onChange={text => settitle(text)}
-          placeholder="Enter Product Title"
+          placeholder="Enter Title"
         />
-        <Input
-          label="Price"
-          value={price}
-          onChange={text => setprice(text)}
-          placeholder="Enter Product Price"
-          type="decimal-pad"
-        />
-        <View style={{display: 'flex', flexDirection: 'row'}}>
-          {['Kg', '500G', '250G'].map(Unit => (
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {colorData.map(Color => (
             <TouchableOpacity
+              key={Color}
               activeOpacity={0.5}
-              key={Unit}
+              onPress={() => setcolor(Color)}
               style={[
-                styles.UnitBox,
-                {backgroundColor: Unit === unit ? '#f4fafd' : 'transparent'},
+                styles.colorData,
+                {
+                  borderColor: Color === color ? '#333' : 'transparent',
+                  backgroundColor: Color,
+                },
               ]}
-              onPress={() => handleUnit(Unit)}>
-              <Text style={styles.UnitTxt}>{Unit}</Text>
-            </TouchableOpacity>
+            />
           ))}
-        </View>
-
+        </ScrollView>
         <TouchableOpacity
           onPress={SaveItem}
           activeOpacity={0.8}
@@ -153,27 +108,6 @@ const styles = StyleSheet.create({
     elevation: 8,
     marginBottom: 10,
   },
-  ChooseImg: {
-    width: 120,
-    height: 120,
-    resizeMode: 'contain',
-    marginBottom: 16,
-    borderRadius: 18,
-    borderWidth: 1,
-    marginRight: 10,
-  },
-  UnitBox: {
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: '#009baf',
-    padding: 4,
-    width: 60,
-    marginRight: 10,
-  },
-  UnitTxt: {
-    color: '#009baf',
-    paddingLeft: 4,
-  },
   SaveBtn: {
     backgroundColor: '#2f2f2f',
     padding: 16,
@@ -184,5 +118,13 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     textAlign: 'center',
+  },
+  colorData: {
+    height: 40,
+    width: 40,
+    borderRadius: 50,
+    borderWidth: 1,
+    marginRight: 6,
+    marginLeft: 6,
   },
 });

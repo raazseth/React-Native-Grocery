@@ -1,23 +1,9 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useContext} from 'react';
+import React from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Store} from '../Utils/Store';
 
 const Card = ({item}) => {
-  const {state, dispatch} = useContext(Store);
-
-  const handleCartBtn = () => {
-    // console.log("Function Will Work Later!")
-
-    dispatch({
-      type: 'CART_ADD_ITEM',
-      payload: {
-        cart: [...state.cart, item],
-        total: state.total + Number(item.price),
-      },
-    });
-  };
 
   return (
     <View style={styles.Card}>
@@ -43,10 +29,7 @@ const Card = ({item}) => {
           <Text style={styles.itemPrice}>{item.price}</Text>
           <Text style={styles.itemUnit}>{item.unit}</Text>
         </View>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          style={styles.CartBtn}
-          onPress={handleCartBtn}>
+        <TouchableOpacity activeOpacity={0.5} style={styles.CartBtn}>
           <Ionicons name="add" size={24} style={{marginLeft: 1}} color="#fff" />
         </TouchableOpacity>
       </View>
