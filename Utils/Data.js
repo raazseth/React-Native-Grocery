@@ -1,0 +1,80 @@
+export const ProductData = [
+  {
+    title: 'Potato',
+    img: 'https://res.cloudinary.com/doqz6idk4/image/upload/v1641925846/Grocery/LcAvMEYOw-Potato.jpg.jpg',
+    price: '8',
+    unit: 'Kg',
+  },
+  {
+    title: 'Tomato',
+    img: 'https://res.cloudinary.com/doqz6idk4/image/upload/v1641926003/Grocery/Hsfun-psv-p3.jpg.jpg',
+    price: '30.7',
+    unit: '500G',
+  },
+  {
+    title: 'Pea',
+    img: 'https://res.cloudinary.com/doqz6idk4/image/upload/v1641926580/Grocery/1YjLJ0I3w-Peas.jpg.jpg',
+    price: '200',
+    unit: 'Kg',
+  },
+  {
+    title: 'Carrot',
+    img: 'https://res.cloudinary.com/doqz6idk4/image/upload/v1641926481/Grocery/eNgr0iNP4-carrot_125262134.jpg.jpg',
+    price: '100',
+    unit: 'Kg',
+  },
+  {
+    title: 'Lady Finger',
+    img: 'https://res.cloudinary.com/doqz6idk4/image/upload/v1641926791/Grocery/V3Uo6f4b5-lady_finger3-1.jpg.jpg',
+    price: '56',
+    unit: 'Kg',
+  },
+  {
+    title: 'Grapes',
+    img: 'https://res.cloudinary.com/doqz6idk4/image/upload/v1641927691/Grocery/Yoc_P7KTH-pro_161571.jpg.jpg',
+    price: '300',
+    unit: 'Kg',
+  },
+  {
+    title: 'Banana',
+    img: 'https://res.cloudinary.com/doqz6idk4/image/upload/v1641927209/Grocery/tWpz-XV9x-banana_64728013.jpg.jpg',
+    price: '45',
+    unit: '250G',
+  },
+  {
+    title: 'Apple',
+    img: 'https://res.cloudinary.com/doqz6idk4/image/upload/v1641926974/Grocery/ZuBjjk02D-stay-sky-suites-Idrive-apples.jpg.jpg',
+    price: '450',
+    unit: 'Kg',
+  },
+  {
+    title: 'Salt',
+    img: 'https://res.cloudinary.com/doqz6idk4/image/upload/v1642061254/Grocery/TEiG6l_9h-105a.jpg.jpg',
+    price: '10',
+    unit: 'Kg',
+  },
+  {
+    title: 'Oil',
+    img: 'https://res.cloudinary.com/doqz6idk4/image/upload/v1642060594/Grocery/eocfVBh7V-43a.jpg.jpg',
+    price: '60',
+    unit: '500G',
+  },
+];
+
+export const ImageDate = [
+  'https://res.cloudinary.com/doqz6idk4/image/upload/v1641925846/Grocery/LcAvMEYOw-Potato.jpg.jpg',
+  'https://res.cloudinary.com/doqz6idk4/image/upload/v1641926003/Grocery/Hsfun-psv-p3.jpg.jpg',
+  'https://res.cloudinary.com/doqz6idk4/image/upload/v1641926580/Grocery/1YjLJ0I3w-Peas.jpg.jpg',
+  'https://res.cloudinary.com/doqz6idk4/image/upload/v1641926481/Grocery/eNgr0iNP4-carrot_125262134.jpg.jpg',
+  'https://res.cloudinary.com/doqz6idk4/image/upload/v1641926791/Grocery/V3Uo6f4b5-lady_finger3-1.jpg.jpg',
+  'https://res.cloudinary.com/doqz6idk4/image/upload/v1641927691/Grocery/Yoc_P7KTH-pro_161571.jpg.jpg',
+  'https://res.cloudinary.com/doqz6idk4/image/upload/v1641927209/Grocery/tWpz-XV9x-banana_64728013.jpg.jpg',
+  'https://res.cloudinary.com/doqz6idk4/image/upload/v1641926974/Grocery/ZuBjjk02D-stay-sky-suites-Idrive-apples.jpg.jpg',
+  'https://res.cloudinary.com/doqz6idk4/image/upload/v1642061254/Grocery/TEiG6l_9h-105a.jpg.jpg',
+  'https://res.cloudinary.com/doqz6idk4/image/upload/v1642060594/Grocery/eocfVBh7V-43a.jpg.jpg',
+  'https://res.cloudinary.com/doqz6idk4/image/upload/v1641927426/Grocery/_qU9-jLbJ-61THuQWrAZL._SX569_.jpg.jpg',
+  'https://res.cloudinary.com/doqz6idk4/image/upload/v1641927071/Grocery/1Laykx-Ha-istockphoto-185284489-612x612.jpg.jpg',
+  'https://res.cloudinary.com/doqz6idk4/image/upload/v1641926753/Grocery/2AW5uHfiv-0020_Green-Capsicum.jpg.jpg',
+  'https://res.cloudinary.com/doqz6idk4/image/upload/v1641926438/Grocery/nOnjENbFY-aubergine_90502372.jpg.jpg',
+  'https://res.cloudinary.com/doqz6idk4/image/upload/v1641926342/Grocery/jkxxEtNaX-cucumber-500-g-0-20200710.jpg.jpg',
+];
