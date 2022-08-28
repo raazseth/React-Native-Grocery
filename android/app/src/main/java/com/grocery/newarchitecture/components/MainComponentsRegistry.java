@@ -1,4 +1,4 @@
-package com.grocery.newarchitecture.components;
+package com.Watchlist.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

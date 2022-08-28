@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "Grocery.app"
-               BlueprintName = "Grocery"
-               ReferencedContainer = "container:Grocery.xcodeproj">
+               BuildableName = "Watchlist.app"
+               BlueprintName = "Watchlist"
+               ReferencedContainer = "container:Watchlist.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "GroceryTests.xctest"
-               BlueprintName = "GroceryTests"
-               ReferencedContainer = "container:Grocery.xcodeproj">
+               BuildableName = "WatchlistTests.xctest"
+               BlueprintName = "WatchlistTests"
+               ReferencedContainer = "container:Watchlist.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Grocery.app"
-            BlueprintName = "Grocery"
-            ReferencedContainer = "container:Grocery.xcodeproj">
+            BuildableName = "Watchlist.app"
+            BlueprintName = "Watchlist"
+            ReferencedContainer = "container:Watchlist.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Grocery.app"
-            BlueprintName = "Grocery"
-            ReferencedContainer = "container:Grocery.xcodeproj">
+            BuildableName = "Watchlist.app"
+            BlueprintName = "Watchlist"
+            ReferencedContainer = "container:Watchlist.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
