@@ -4,6 +4,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import React, {useContext} from 'react';
@@ -28,6 +29,7 @@ const Home = ({navigation}) => {
     {img: require('../Assets/65481.png')},
   ];
 
+  console.log(state);
   return (
     <Layout isHeader navigation={navigation} showOverlay={true}>
       <View>
@@ -39,7 +41,20 @@ const Home = ({navigation}) => {
             itemWidth={ITEM_WIDTH}
           />
         </View>
-
+        {state.cart.length > 0 ? (
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Cart')}
+            activeOpacity={0.8}
+            style={styles.cartCard}>
+            <Image
+              source={require('../Assets/carts.png')}
+              style={{width: 24, height: 24}}
+            />
+            <Text style={styles.cartCardTxt}>
+              You have {state.cart.length} item in your cart!
+            </Text>
+          </TouchableOpacity>
+        ) : null}
         <View style={styles.Trend}>
           <Image
             source={{
@@ -123,5 +138,28 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginLeft: 12,
     marginTop: 6,
+  },
+  cartCard: {
+    display: 'flex',
+    flexDirection: 'row',
+    borderRadius: 12,
+    borderWidth: 1,
+    backgroundColor: '#fff6f7',
+    borderColor: '#F38EAD',
+    padding: 7,
+    width: '95%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 4,
+    marginBottom: 4,
+  },
+  cartCardTxt: {
+    fontWeight: 'bold',
+    color: '#F38EAD',
+    fontSize: 18,
+    marginTop: 'auto',
+    marginRight: 'auto',
+    marginLeft: 6,
+    fontStyle: 'italic',
   },
 });

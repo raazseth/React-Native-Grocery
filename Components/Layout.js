@@ -49,7 +49,9 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   NormalBox: {
-    height: 'auto',
+    height: '100%',
     padding: 12,
+    position:"relative"
+
   },
 });

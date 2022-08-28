@@ -1,17 +1,22 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useContext} from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Store} from '../Utils/Store';
 
 const Card = ({item}) => {
+  const {state, dispatch} = useContext(Store);
+
   const handleCartBtn = () => {
-    console.log("Function Will Work Later!")
+    // console.log("Function Will Work Later!")
+
+    dispatch({
+      type: 'CART_ADD_ITEM',
+      payload: {
+        cart: [...state.cart, item],
+        total: state.total + Number(item.price),
+      },
+    });
   };
 
   return (

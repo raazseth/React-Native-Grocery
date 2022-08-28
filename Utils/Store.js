@@ -7,6 +7,8 @@ export const Store = createContext('');
 
 const initialState = {
   Items: ProductData,
+  cart: [],
+  total: 0,
   loading: false,
   error: null,
 };
@@ -17,6 +19,13 @@ function reducer(state, action) {
       return {
         ...state,
         Items: action.payload.Items,
+      };
+    }
+    case 'CART_ADD_ITEM': {
+      return {
+        ...state,
+        cart: action.payload.cart,
+        total: action.payload.total,
       };
     }
 
